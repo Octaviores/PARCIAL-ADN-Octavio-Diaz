@@ -1,3 +1,6 @@
+FROM alpine:latest as build
+
+
 RUN apk update
 RUN apk add openjdk17
 
@@ -10,8 +13,6 @@ EXPOSE 9000
 COPY --from=build ./build/libs/APIMutant-0.0.1-SNAPSHOT.jar ./app.jar
 
 ENTRYPOINT ["java", "-jar", "app.jar"]
-
-
 
 
 
