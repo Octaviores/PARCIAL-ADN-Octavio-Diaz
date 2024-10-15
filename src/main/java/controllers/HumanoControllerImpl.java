@@ -2,6 +2,7 @@ package controllers;
 
 
 
+import entities.Humano;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,15 +14,20 @@ import services.HumanoService;
 
 @RestController
 @RequestMapping("/api/humanos")
-public class HumanoControllerImpl {
+public class HumanoControllerImpl implements HumanoController{
 
     @Autowired
     private HumanoService humanoService;
 
+
     @PostMapping("/mutant")
-    public ResponseEntity<String> verificarMutante(@RequestBody String[] ADN) {
-        // Devolución del metodo isMutant
+    @Override
+    public ResponseEntity<String> verificarMutante(@RequestBody Humano humano) {
         try {
+            // Convertir el atributo DNA de tipo String a un arreglo de cadenas
+            String[] ADN = humano.getDNA().split(",");
+
+            // Verificar si el ADN es mutante
             if (humanoService.isMutant(ADN)) {
                 return new ResponseEntity<>("Es mutante", HttpStatus.OK);
             } else {
@@ -31,4 +37,7 @@ public class HumanoControllerImpl {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
-}
+
+
+    }
+
