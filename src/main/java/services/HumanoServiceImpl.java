@@ -26,7 +26,7 @@ public class HumanoServiceImpl implements HumanoService {
 
         // Guardar en la base de datos el resultado
         Humano humano = new Humano();
-        humano.setDNA(String.join(",", ADN));
+        humano.setDNA(ADN);
         humano.setMutant(esMutante);
         humanoRepository.save(humano);
 

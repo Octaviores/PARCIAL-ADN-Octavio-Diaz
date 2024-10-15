@@ -28,7 +28,7 @@ public class Humano implements Serializable {
     private String apellido;
 
     @Column(name = "DNA")
-    private String DNA;
+    private String[] DNA;
 
     @Getter
     private boolean mutant;
