@@ -13,7 +13,7 @@
 </head>
 <body>
 
-<h1>Examen Mercadolibre</h1>
+<h1>Parcial BackEnd</h1>
 <p>Magneto quiere reclutar la mayor cantidad de mutantes para poder luchar contra los X-Mens.</p>
 <p>Te ha contratado para desarrollar un proyecto que detecte si un humano es mutante basándose en su secuencia de ADN.</p>
 
