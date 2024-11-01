@@ -80,7 +80,7 @@
 </div>
 
 <h2>Instrucciones de Code Coverage</h2>
-<p>Para ejecutar las pruebas y comprobar el code coverage, ejecuta la clase <code>HumanoTest</code> en el entorno de desarrollo. Se ha logrado un <strong>coverage mayor al 80%</strong>.</p>
+<p>Para ejecutar las pruebas y comprobar el code coverage, ejecuta la clase <code>HumanoTest</code> en el entorno de desarrollo. Se ha logrado un <strong>coverage de 83%</strong>.</p>
 
 <h2>Pruebas de Estrés</h2>
 <p>Para realizar pruebas de estrés en la API, configura y ejecuta tus pruebas en Apache JMeter.</p>
@@ -89,9 +89,12 @@
   <li><code>/api/humanos/stats</code>: Endpoint para obtener estadísticas bajo pruebas de carga.</li>
 </ul>
 
+
 <h2>Diagrama de Secuencia</h2>
-<p>A continuación se muestra un diagrama de secuencia del flujo principal de detección de mutantes:</p>
-<img src="ruta/a/tu/diagrama.png" alt="Diagrama de Secuencia">
+<p>Si deseas descargar el diagrama de secuencia en formato PDF tanto para POST como GET, haz clic en el siguiente enlace:</p>
+<ul>
+ <li><a href="https://drive.google.com/drive/folders/1Mz6uV8eR_u4hq60Tq6aa5pjI1D8wzI44" target="_blank">Descargar Diagrama de Secuencia (PDF)</a></li>
+</ul>
 
 </body>
 </html>
