@@ -1,4 +1,4 @@
-package com.example.APIMutant.respositories;
+package com.example.APIMutant.repositories;
 
 
 import com.example.APIMutant.entities.Humano;

@@ -21,13 +21,6 @@ public class Humano implements Serializable {
     private Long id;
 
 
-    @Column(name = "nombre")
-    private String nombre;
-
-
-    @Column(name = "apellido")
-    private String apellido;
-
     @Column(name = "DNA")
     private String DNA;
 
@@ -36,13 +29,14 @@ public class Humano implements Serializable {
 
     // Metodo para convertir String[] a cadena para almacenamiento
     public void setDNA(String[] dnaArray) {
-        this.DNA = String.join(",", dnaArray);
+        this.DNA = (dnaArray != null) ? String.join(",", dnaArray) : "";
     }
 
     // Metodo para convertir la cadena de vuelta a String[]
     public String[] getDNAArray() {
-        return this.DNA != null ? this.DNA.split(",") : new String[0];
+        return this.DNA != null && !this.DNA.isEmpty() ? this.DNA.split(",") : new String[0];
     }
+
 
 }
 

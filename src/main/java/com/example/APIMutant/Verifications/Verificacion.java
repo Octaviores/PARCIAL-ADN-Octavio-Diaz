@@ -3,29 +3,23 @@ package com.example.APIMutant.Verifications;
 public class Verificacion {
     public static boolean validarADN(String[] ADN) {
         if (ADN == null) {
-            System.out.println("ADN es null");
-            return false;
+            throw new IllegalArgumentException("El ADN no puede ser null.");
         }
 
         int N = ADN.length;
-        System.out.println("Longitud del array ADN: " + N);
 
-        if (N == 0) {
-            System.out.println("Array vacío");
-            return false;
+        if (N < 4) {
+            throw new IllegalArgumentException("La matriz de ADN debe tener al menos 4x4.");
         }
 
         for (String cadena : ADN) {
-            System.out.println("Cadena actual: " + cadena);
             if (cadena == null || cadena.length() != N) {
-                System.out.println("Cadena inválida: longitud incorrecta o null");
-                return false;
+                throw new IllegalArgumentException("La matriz de ADN debe ser cuadrada NxN.");
             }
 
             for (char letra : cadena.toCharArray()) {
                 if ("ATCG".indexOf(letra) == -1) {
-                    System.out.println("Letra no permitida encontrada: " + letra);
-                    return false;
+                    throw new IllegalArgumentException("El ADN contiene letras no permitidas.");
                 }
             }
         }

@@ -12,5 +12,4 @@ public class HumanoRequest {
 
     private String[] dna;
 
-
 }

@@ -2,13 +2,13 @@ package com.example.APIMutant.services;
 
 
 import com.example.APIMutant.DTOs.HumanoStats;
-import com.example.APIMutant.respositories.HumanoRepository;
+import com.example.APIMutant.repositories.HumanoRepository;
+import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service
+@Getter
 public class StatsService {
 
     @Autowired

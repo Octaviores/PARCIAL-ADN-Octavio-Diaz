@@ -5,7 +5,7 @@ import com.example.APIMutant.DTOs.HumanoRequest;
 import com.example.APIMutant.DTOs.HumanoResponse;
 import com.example.APIMutant.entities.Humano;
 import org.springframework.stereotype.Service;
-import com.example.APIMutant.respositories.HumanoRepository;
+import com.example.APIMutant.repositories.HumanoRepository;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -27,11 +27,7 @@ public class HumanoServiceImpl implements HumanoService {
         System.out.println("Inicio de isMutant");
         String[] ADN = humanoRequest.getDna();
 
-        if (ADN == null) {
-            System.out.println("ADN es null");
-        } else {
-            System.out.println("ADN recibido: " + Arrays.toString(ADN));
-        }
+
 
         if (!Verificacion.validarADN(ADN)) {  // Valido que no haya inconsistencias
             System.out.println("ADN no válido");
@@ -65,7 +61,6 @@ public class HumanoServiceImpl implements HumanoService {
     }
 
     private boolean verificarMutante(String[] ADN) {
-
         int N = ADN.length;
         StringBuilder unirCadenas = new StringBuilder(); // Concatenar todas las cadenas de ADN en un solo StringBuilder
         Set<Character> letrasEncontradas = new HashSet<>();  // Para verificar si encontré 2 secuencias distintas
@@ -74,11 +69,26 @@ public class HumanoServiceImpl implements HumanoService {
             unirCadenas.append(cadena);
         }
 
-        int f = 0;
-        int c = 0;
-        int d = 0;
+        int totalCoincidencias = 0;
 
         // Verificar coincidencias en filas
+        totalCoincidencias += buscarFilas(unirCadenas, letrasEncontradas);
+
+        // Verificar coincidencias en columnas
+        totalCoincidencias += buscarColumnas(unirCadenas, letrasEncontradas, N);
+
+        // Verificar coincidencias en diagonales
+        totalCoincidencias += buscarDiagonalIzquierda(unirCadenas, letrasEncontradas, N);
+        totalCoincidencias += buscarDiagonalDerecha(unirCadenas, letrasEncontradas, N);
+
+        return totalCoincidencias >= 2; // Si encontraste al menos dos coincidencias, es un mutante
+    }
+
+    // Metodo para buscar coincidencias en filas
+    private int buscarFilas(StringBuilder unirCadenas, Set<Character> letrasEncontradas) {
+        int coincidencias = 0;
+        int f = 0;
+
         do {
             char letra = unirCadenas.charAt(f);
             if (f > 2 &&
@@ -90,16 +100,21 @@ public class HumanoServiceImpl implements HumanoService {
                 System.out.println("Coincidencia en fila: " + letra + " en posiciones: " + (f - 3) + ", " + (f - 2) + ", " + (f - 1) + ", " + f);
 
                 letrasEncontradas.add(letra);
-                if (letrasEncontradas.size() >= 2) {
-                    return true; // Dos coincidencias con letras distintas encontradas
-                }
-                f += 3;
+                coincidencias++; // Incrementar el conteo de coincidencias
+                f += 3; // Saltar a la siguiente posición relevante
             }
             f++;
         } while (f < unirCadenas.length());
 
-        // Verificar coincidencias en columnas
+        return coincidencias; // Devolver el total de coincidencias encontradas
+    }
+
+    // Metodo para buscar coincidencias en columnas
+    private int buscarColumnas(StringBuilder unirCadenas, Set<Character> letrasEncontradas, int N) {
+        int coincidencias = 0;
+        int c = 0;
         int cambioColumna = 0;
+
         do {
             char letra = unirCadenas.charAt(c);
             if (cambioColumna <= N - 1 &&
@@ -112,21 +127,25 @@ public class HumanoServiceImpl implements HumanoService {
                 System.out.println("Coincidencia en columna: " + letra + " en posiciones: " + (c) + ", " + (c + N) + ", " + (c + N * 2) + ", " + (c + N * 3));
 
                 letrasEncontradas.add(letra);
-                if (letrasEncontradas.size() >= 2) {
-                    return true; // Dos coincidencias con letras distintas encontradas
-                }
-                c += N * 4;
+                coincidencias++; // Incrementar el conteo de coincidencias
+                c += N * 4; // Saltar a la siguiente posición relevante
             } else {
-                c += N;
+                c += N; // Moverse a la siguiente fila en la misma columna
             }
             if (c >= unirCadenas.length()) {
                 cambioColumna++;
-                c = cambioColumna;
+                c = cambioColumna; // Reiniciar c para la siguiente columna
             }
         } while (cambioColumna < N);
 
-        // Verificar coincidencias en diagonales
-        // Diagonales de izquierda a derecha
+        return coincidencias; // Devolver el total de coincidencias encontradas
+    }
+
+    // Metodo para buscar coincidencias en diagonales de izquierda a derecha
+    private int buscarDiagonalIzquierda(StringBuilder unirCadenas, Set<Character> letrasEncontradas, int N) {
+        int coincidencias = 0;
+        int d = 0;
+
         do {
             char letra = unirCadenas.charAt(d);
             if (d <= unirCadenas.length() - (N * 4) &&
@@ -139,11 +158,21 @@ public class HumanoServiceImpl implements HumanoService {
                         d + ", " + (d + N + 1) + ", " + (d + (N * 2) + 2) + ", " + (d + (N * 3) + 3));
 
                 letrasEncontradas.add(letra);
-                if (letrasEncontradas.size() >= 2) {
-                    return true; // Dos coincidencias con letras distintas encontradas
-                }
+                coincidencias++; // Incrementar el conteo de coincidencias
             }
-            // Diagonales de derecha a izquierda
+            d++;
+        } while (d < unirCadenas.length());
+
+        return coincidencias; // Devolver el total de coincidencias encontradas
+    }
+
+    // Metodo para buscar coincidencias en diagonales de derecha a izquierda
+    private int buscarDiagonalDerecha(StringBuilder unirCadenas, Set<Character> letrasEncontradas, int N) {
+        int coincidencias = 0;
+        int d = 0;
+
+        do {
+            char letra = unirCadenas.charAt(d);
             if (d <= unirCadenas.length() - (N * 4) &&
                     d % N >= 3 &&
                     letra == unirCadenas.charAt(d + N - 1) &&
@@ -155,14 +184,14 @@ public class HumanoServiceImpl implements HumanoService {
                         d + ", " + (d + N - 1) + ", " + (d + (N * 2) - 2) + ", " + (d + (N * 3) - 3));
 
                 letrasEncontradas.add(letra);
-                if (letrasEncontradas.size() >= 2) {
-                    return true; // Dos coincidencias con letras distintas encontradas
-                }
+                coincidencias++; // Incrementar el conteo de coincidencias
             }
             d++;
         } while (d < unirCadenas.length());
 
-        return false; // Si el Hash nunca tuvo un tamaño mayor a 2, entonces nunca hubo coincidencias suficientes.
+        return coincidencias; // Devolver el total de coincidencias encontradas
     }
+
+
 
 }
