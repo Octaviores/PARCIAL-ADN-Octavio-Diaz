@@ -46,6 +46,11 @@
 <h3>Nivel 3</h3>
 <p>Integración con una base de datos H2 para almacenar las secuencias de ADN analizadas, evitando registros duplicados. Exposición de un nuevo endpoint <code>/stats</code> que devuelve estadísticas de las verificaciones de ADN en JSON.</p>
 
+<p><strong>URL para acceder a deploy en Render:</strong></p>
+<ul>
+  <li><a href="https://parcial-adn-octavio-diaz.onrender.com">https://parcial-adn-octavio-diaz.onrender.com</a></li>
+</ul>
+
 <p><strong>URL para ver estadísticas:</strong></p>
 <ul>
   <li><a href="https://parcial-adn-octavio-diaz.onrender.com/api/humanos/stats">https://parcial-adn-octavio-diaz.onrender.com/api/humanos/stats</a></li>
