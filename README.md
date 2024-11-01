@@ -1,16 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <title>Examen Mercadolibre - Detección de Mutantes</title>
-  <style>
-    body { font-family: Arial, sans-serif; }
-    h1, h2, h3 { color: #2c3e50; }
-    code { background-color: #ecf0f1; padding: 2px 4px; font-size: 90%; }
-    .code-block { background-color: #ecf0f1; padding: 10px; margin: 10px 0; border-radius: 5px; }
-    a { color: #2980b9; }
-  </style>
-</head>
+
 <body>
 
 <h1>Parcial BackEnd</h1>
