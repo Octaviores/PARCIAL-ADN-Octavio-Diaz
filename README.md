@@ -93,7 +93,7 @@
 <h2>Diagrama de Secuencia</h2>
 <p>Si deseas descargar el diagrama de secuencia en formato PDF tanto para POST como GET, haz clic en el siguiente enlace:</p>
 <ul>
- <li><a href="https://drive.google.com/drive/folders/1Mz6uV8eR_u4hq60Tq6aa5pjI1D8wzI44" target="_blank">Descargar Diagrama de Secuencia (PDF)</a></li>
+ <li><a href="https://drive.google.com/drive/folders/1Mz6uV8eR_u4hq60Tq6aa5pjI1D8wzI44" target="_blank">DiagramasDeSecuencia</a></li>
 </ul>
 
 </body>
